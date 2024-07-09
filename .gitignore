@@ -1,0 +1,14 @@
+.DS_Store
+.vscode
+.idea
+.env
+
+/build
+/coverage
+/node_modules
+
+# libraries
+npm-debug.log
+
+index.js
+index.js.map
