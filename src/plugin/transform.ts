@@ -33,11 +33,11 @@ const registerTransform = (
     });
 };
 
-type NormalizedPluginOptions = Omit<PluginOptions, 'runtime'> & {
+type NormalizedPluginOptions = Omit<TransformOptions, 'runtime'> & {
     runtime: Runtime;
 };
 
-export type PluginOptions = {
+export type TransformOptions = {
     runtime?:
         | string
         | {
@@ -51,7 +51,7 @@ type InputOptions = {
     destRoot: string;
 };
 
-export function transform(options: Partial<PluginOptions> = {}) {
+export function transform(options: Partial<TransformOptions> = {}) {
     const {bundle = true} = options;
 
     if (bundle && typeof options.runtime === 'string') {
