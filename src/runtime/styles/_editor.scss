@@ -1,0 +1,44 @@
+// this styles for folding headings in markdown editor
+
+@use './mixins' as m;
+
+.yfm {
+    h1[data-folded],
+    h2[data-folded],
+    h3[data-folded],
+    h4[data-folded],
+    h5[data-folded],
+    h6[data-folded] {
+        @include m.chevron();
+    }
+
+    h1[data-folded] {
+        @include m.chevron_size_xl();
+    }
+
+    h2[data-folded],
+    h3[data-folded] {
+        @include m.chevron_size_l();
+    }
+
+    h4[data-folded] {
+        @include m.chevron_size_m();
+    }
+
+    h5[data-folded] {
+        @include m.chevron_size_s();
+    }
+
+    h6[data-folded] {
+        @include m.chevron_size_xs();
+    }
+
+    h1[data-folded=false],
+    h2[data-folded=false],
+    h3[data-folded=false],
+    h4[data-folded=false],
+    h5[data-folded=false],
+    h6[data-folded=false] {
+        @include m.chevron_open();
+    }
+}
