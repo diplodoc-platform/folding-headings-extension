@@ -132,7 +132,7 @@ describe('Folding Headings - plugin', () => {
         expect(tokens).toStrictEqual(commonHeadingTokens);
     });
 
-    it('should parse markup to common headings', () => {
+    it('should parse markup to folding headings', () => {
         const md = new MarkdownIt().use(foldingHeadingsTransformer({ bundle: false }));
         const markup = `
 #+ Feading1

@@ -56,8 +56,10 @@ export const headingBlockRule: ParserBlock.RuleBlock = (state, startLine, _endLi
     let token = state.push(TokenType.HeadingOpen, 'h' + String(level), 1);
     token.markup = '########'.slice(0, level) + (folding ? '+' : '');
     token.map = [startLine, state.line];
-    token.meta ||= {};
-    token.meta.folding = folding;
+    if (folding) {
+        token.meta ||= {};
+        token.meta.folding = true;
+    }
 
     token = state.push('inline', '', 0);
     token.content = state.src.slice(pos, max).trim();
@@ -66,8 +68,10 @@ export const headingBlockRule: ParserBlock.RuleBlock = (state, startLine, _endLi
 
     token = state.push(TokenType.HeadingClose, 'h' + String(level), -1);
     token.markup = '########'.slice(0, level) + (folding ? '+' : '');
-    token.meta ||= {};
-    token.meta.folding = folding;
+    if (folding) {
+        token.meta ||= {};
+        token.meta.folding = true;
+    }
 
     return true;
 };
