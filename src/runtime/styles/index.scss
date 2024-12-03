@@ -10,7 +10,6 @@ $yfmAnchorWidth: 24px;
     &-content {
         display: none;
         padding-left: $paddingLeft;
-        overflow: hidden;
         transition: height 0.3s ease-in-out;
 
         & > #{$class} {
