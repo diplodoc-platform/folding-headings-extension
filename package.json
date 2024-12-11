@@ -31,10 +31,11 @@
   ],
   "scripts": {
     "build": "run-p build:*",
-    "build:js": "./esbuild/build.mjs",
     "build:declarations": "tsc --emitDeclarationOnly --outDir ./build",
+    "build:js": "./esbuild/build.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "prepublishOnly": "npm run build",
     "test": "jest"
   },
   "devDependencies": {
