@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.1.2...v0.1.3) (2025-08-25)
+
+
+### Bug Fixes
+
+* update version actions, node 22 ([cd9f102](https://github.com/diplodoc-platform/folding-headings-extension/commit/cd9f1020b37a533e64e9a3d599b5f1ef520b71c3))
+
 ## [0.1.2](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.1.1...v0.1.2) (2024-12-11)
 
 
