@@ -1,4 +1,4 @@
-import type { Heading } from '@diplodoc/transform/lib/typings';
+import type {Heading} from '@diplodoc/transform/lib/typings';
 
 export const sectionsHtmlResult = `
 <section class="heading-section" data-diplodoc-key="heading-section" data-diplodoc-id="heading-section-4g2ndquh">

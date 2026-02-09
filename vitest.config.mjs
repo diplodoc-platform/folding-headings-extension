@@ -4,7 +4,7 @@ export default defineConfig({
     test: {
         environment: 'node',
         globals: true,
-        include: ['tests/**/*.test.ts', 'tests/**/*.spec.ts'],
+        include: ['test/**/*.test.ts', 'test/**/*.spec.ts'],
         exclude: ['node_modules', 'build'],
         snapshotFormat: {
             escapeString: true,
