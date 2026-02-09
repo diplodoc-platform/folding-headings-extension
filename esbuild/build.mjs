@@ -3,7 +3,7 @@
 import {build} from '@diplodoc/lint/esbuild';
 import {sassPlugin} from 'esbuild-sass-plugin';
 
-import tsConfig from '../tsconfig.json' with { type: "json" };
+import tsConfig from '../tsconfig.json' with {type: 'json'};
 
 const outDir = 'build/';
 
@@ -32,7 +32,7 @@ const plugin = {
     outfile: outDir + 'plugin/index.js',
     platform: 'node',
     packages: 'external',
-}
+};
 
 build(runtime);
 build(plugin);

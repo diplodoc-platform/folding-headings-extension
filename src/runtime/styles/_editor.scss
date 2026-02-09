@@ -33,12 +33,12 @@
         @include m.chevron_size_xs();
     }
 
-    h1[data-folded=false],
-    h2[data-folded=false],
-    h3[data-folded=false],
-    h4[data-folded=false],
-    h5[data-folded=false],
-    h6[data-folded=false] {
+    h1[data-folded='false'],
+    h2[data-folded='false'],
+    h3[data-folded='false'],
+    h4[data-folded='false'],
+    h5[data-folded='false'],
+    h6[data-folded='false'] {
         @include m.chevron_open();
     }
 }

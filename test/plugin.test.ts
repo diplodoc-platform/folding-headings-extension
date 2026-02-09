@@ -15,11 +15,14 @@ import {
 describe('Folding Headings - plugin', () => {
     beforeEach(() => {
         let tmp = 0.123456789;
-        vi.spyOn(global.Math, 'random').mockImplementation(() => (tmp += 0.000056789));
+        vi.spyOn(globalThis.Math, 'random').mockImplementation(() => {
+            tmp += 0.000056789;
+            return tmp;
+        });
     });
 
     afterEach(() => {
-        vi.spyOn(global.Math, 'random').mockRestore();
+        vi.spyOn(globalThis.Math, 'random').mockRestore();
     });
 
     it('should render common headings', () => {
