@@ -35,11 +35,14 @@
   "scripts": {
     "build": "run-p build:*",
     "build:declarations": "tsc --emitDeclarationOnly --outDir ./build",
-    "build:js": "./esbuild/build.mjs",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prepublishOnly": "npm run build",
-    "test": "jest"
+    "build:js": "node ./esbuild/build.mjs",
+    "prepublishOnly": "npm run typecheck && npm run lint && npm test && npm run build",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "lint": "lint update && lint",
+    "lint:fix": "lint update && lint fix",
+    "pre-commit": "lint update && lint-staged",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@diplodoc/eslint-config": "^2.0.0",
