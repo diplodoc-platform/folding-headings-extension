@@ -9,3 +9,10 @@
 
 # libraries
 npm-debug.log
+
+.history
+node_modules
+/lib
+/dist
+/cache
+/external
