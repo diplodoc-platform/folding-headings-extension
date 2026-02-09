@@ -1,20 +1,26 @@
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import MarkdownIt from 'markdown-it';
 import yfmTransform from '@diplodoc/transform';
 import anchorsPlugin from '@diplodoc/transform/lib/plugins/anchors';
 
-import { transform as foldingHeadingsTransformer } from '../src/plugin/transform';
+import {transform as foldingHeadingsTransformer} from '../src/plugin/transform';
 
-import { headingsResult, sectionsHtmlResult, commonHeadingTokens, foldingHeadingTokens } from './data';
+import {
+    commonHeadingTokens,
+    foldingHeadingTokens,
+    headingsResult,
+    sectionsHtmlResult,
+} from './data';
 
 describe('Folding Headings - plugin', () => {
     beforeEach(() => {
         let tmp = 0.123456789;
-        jest.spyOn(global.Math, 'random').mockImplementation(() => tmp += 0.000056789);
+        vi.spyOn(global.Math, 'random').mockImplementation(() => (tmp += 0.000056789));
     });
 
     afterEach(() => {
-        jest.spyOn(global.Math, 'random').mockRestore();
-    })
+        vi.spyOn(global.Math, 'random').mockRestore();
+    });
 
     it('should render common headings', () => {
         const markup = `
@@ -37,7 +43,10 @@ describe('Folding Headings - plugin', () => {
 <h6>Heading6</h6>
 `.trimStart();
 
-        expect(yfmTransform(markup, { plugins: [foldingHeadingsTransformer({ bundle: false })] }).result.html).toBe(html);
+        expect(
+            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
+                .html,
+        ).toBe(html);
     });
 
     it('should render common headings', () => {
@@ -52,38 +61,52 @@ describe('Folding Headings - plugin', () => {
 
         `.trim();
 
-        expect(yfmTransform(markup, { plugins: [foldingHeadingsTransformer({ bundle: false })] }).result.html).toBe(sectionsHtmlResult);
+        expect(
+            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
+                .html,
+        ).toBe(sectionsHtmlResult);
     });
 
     it('should dont add assets to meta for common heading', () => {
         const markup = '# Heading';
-        expect(yfmTransform(markup, { plugins: [foldingHeadingsTransformer({ bundle: false })] }).result.meta).toBeUndefined();
+        expect(
+            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
+                .meta,
+        ).toBeUndefined();
     });
 
     it('should add default assets to meta', () => {
         const markup = '#+ Heading';
         expect(
-            yfmTransform(markup, { plugins: [foldingHeadingsTransformer({ bundle: false })] }).result.meta
-        ).toStrictEqual({ script: ['_assets/folding-headings-extension.js'], style: ['_assets/folding-headings-extension.css'] });
+            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
+                .meta,
+        ).toStrictEqual({
+            script: ['_assets/folding-headings-extension.js'],
+            style: ['_assets/folding-headings-extension.css'],
+        });
     });
 
     it('should add custom assets to meta', () => {
         const markup = '#+ Heading';
         expect(
-            yfmTransform(markup, { plugins: [foldingHeadingsTransformer({ bundle: false, runtime: 'folding' })] }).result.meta
-        ).toStrictEqual({ script: ['folding'], style: ['folding'] });
+            yfmTransform(markup, {
+                plugins: [foldingHeadingsTransformer({bundle: false, runtime: 'folding'})],
+            }).result.meta,
+        ).toStrictEqual({script: ['folding'], style: ['folding']});
     });
 
     it('should add custom assets to meta 2', () => {
         const markup = '#+ Heading';
         expect(
             yfmTransform(markup, {
-                plugins: [foldingHeadingsTransformer({
-                    bundle: false,
-                    runtime: { script: 'folding.script', style: 'folding.style' },
-                })]
-            }).result.meta
-        ).toStrictEqual({ script: ['folding.script'], style: ['folding.style'] });
+                plugins: [
+                    foldingHeadingsTransformer({
+                        bundle: false,
+                        runtime: {script: 'folding.script', style: 'folding.style'},
+                    }),
+                ],
+            }).result.meta,
+        ).toStrictEqual({script: ['folding.script'], style: ['folding.style']});
     });
 
     it('should collect common headings', () => {
@@ -99,7 +122,9 @@ describe('Folding Headings - plugin', () => {
         `.trim();
 
         expect(
-            yfmTransform(markup, { plugins: [anchorsPlugin, foldingHeadingsTransformer({ bundle: false })] }).result.headings
+            yfmTransform(markup, {
+                plugins: [anchorsPlugin, foldingHeadingsTransformer({bundle: false})],
+            }).result.headings,
         ).toStrictEqual(headingsResult);
     });
 
@@ -116,12 +141,14 @@ describe('Folding Headings - plugin', () => {
         `.trim();
 
         expect(
-            yfmTransform(markup, { plugins: [anchorsPlugin, foldingHeadingsTransformer({ bundle: false })] }).result.headings
+            yfmTransform(markup, {
+                plugins: [anchorsPlugin, foldingHeadingsTransformer({bundle: false})],
+            }).result.headings,
         ).toStrictEqual(headingsResult);
     });
 
     it('should parse markup to common headings', () => {
-        const md = new MarkdownIt().use(foldingHeadingsTransformer({ bundle: false }));
+        const md = new MarkdownIt().use(foldingHeadingsTransformer({bundle: false}));
         const markup = `
 # Heading1
 
@@ -133,7 +160,7 @@ describe('Folding Headings - plugin', () => {
     });
 
     it('should parse markup to folding headings', () => {
-        const md = new MarkdownIt().use(foldingHeadingsTransformer({ bundle: false }));
+        const md = new MarkdownIt().use(foldingHeadingsTransformer({bundle: false}));
         const markup = `
 #+ Feading1
 
@@ -145,12 +172,12 @@ describe('Folding Headings - plugin', () => {
     });
 
     it('should add folding flag to token.meta', () => {
-        const md = new MarkdownIt().use(foldingHeadingsTransformer({ bundle: false }));
+        const md = new MarkdownIt().use(foldingHeadingsTransformer({bundle: false}));
         const markup = '##+ Heading2';
         const headingOpenToken = md.parse(markup, {})[1];
         expect(headingOpenToken.type === 'heading_open');
         expect(headingOpenToken.markup).toBe('##+');
-        expect(headingOpenToken.meta).toStrictEqual({ folding: true });
+        expect(headingOpenToken.meta).toStrictEqual({folding: true});
     });
 
     it('should close section before heading with same level', () => {
@@ -164,19 +191,19 @@ describe('Folding Headings - plugin', () => {
         `.trim();
         const tokenTypes = pickTypes(md.parse(markup, {}));
         expect(tokenTypes).toStrictEqual([
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_close",
-            "heading_section_close",
-            "heading_open",
-            "inline",
-            "heading_close",
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_close',
+            'heading_section_close',
+            'heading_open',
+            'inline',
+            'heading_close',
         ]);
     });
 
@@ -195,33 +222,33 @@ para3
         `.trim();
         const tokenTypes = pickTypes(md.parse(markup, {}));
         expect(tokenTypes).toStrictEqual([
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "paragraph_open",
-            "inline",
-            "paragraph_close",
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "paragraph_open",
-            "inline",
-            "paragraph_close",
-            "heading_section_content_close",
-            "heading_section_close",
-            "heading_section_content_close",
-            "heading_section_close",
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "heading_section_content_close",
-            "heading_section_close",
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'paragraph_open',
+            'inline',
+            'paragraph_close',
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'paragraph_open',
+            'inline',
+            'paragraph_close',
+            'heading_section_content_close',
+            'heading_section_close',
+            'heading_section_content_close',
+            'heading_section_close',
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'heading_section_content_close',
+            'heading_section_close',
         ]);
     });
 
@@ -233,18 +260,18 @@ para3
         `.trim();
         const tokenTypes = pickTypes(md.parse(markup, {}));
         expect(tokenTypes).toStrictEqual([
-            "blockquote_open",
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "paragraph_open",
-            "inline",
-            "paragraph_close",
-            "heading_section_content_close",
-            "heading_section_close",
-            "blockquote_close",
+            'blockquote_open',
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'paragraph_open',
+            'inline',
+            'paragraph_close',
+            'heading_section_content_close',
+            'heading_section_close',
+            'blockquote_close',
         ]);
     });
 
@@ -258,25 +285,25 @@ para3
         `.trim();
         const tokenTypes = pickTypes(md.parse(markup, {}));
         expect(tokenTypes).toStrictEqual([
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "blockquote_open",
-            "heading_section_open",
-            "heading_open",
-            "inline",
-            "heading_close",
-            "heading_section_content_open",
-            "paragraph_open",
-            "inline",
-            "paragraph_close",
-            "heading_section_content_close",
-            "heading_section_close",
-            "blockquote_close",
-            "heading_section_content_close",
-            "heading_section_close",
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'blockquote_open',
+            'heading_section_open',
+            'heading_open',
+            'inline',
+            'heading_close',
+            'heading_section_content_open',
+            'paragraph_open',
+            'inline',
+            'paragraph_close',
+            'heading_section_content_close',
+            'heading_section_close',
+            'blockquote_close',
+            'heading_section_content_close',
+            'heading_section_close',
         ]);
     });
 });

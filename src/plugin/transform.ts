@@ -1,5 +1,5 @@
 import type MarkdownIt from 'markdown-it';
-import {PluginWithOptions} from 'markdown-it';
+import type {PluginWithOptions} from 'markdown-it';
 
 import {ENV_FLAG_NAME} from './const';
 import {foldingHeadingPlugin} from './plugin';

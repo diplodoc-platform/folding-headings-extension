@@ -16,6 +16,7 @@ export const sectionsCoreRule: Core.RuleCore = (state) => {
         if (token.type.search(TokenType.Heading) !== 0) {
             nestedLevel += token.nesting;
         }
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         if (last(sections) && nestedLevel < last(sections)!.nesting) {
             closeSectionsToCurrentNesting(nestedLevel);
         }
@@ -83,7 +84,9 @@ export const sectionsCoreRule: Core.RuleCore = (state) => {
     function closeSections(section: Section) {
         while (
             last(sections) &&
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             section.header <= last(sections)!.header &&
+            // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
             section.nesting <= last(sections)!.nesting
         ) {
             sections.pop();
@@ -93,6 +96,7 @@ export const sectionsCoreRule: Core.RuleCore = (state) => {
     }
 
     function closeSectionsToCurrentNesting(nesting: number) {
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         while (last(sections) && nesting < last(sections)!.nesting) {
             sections.pop();
             tokens.push(closeContent());

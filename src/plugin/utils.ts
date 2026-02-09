@@ -24,7 +24,7 @@ export function hidden<B extends Record<string | symbol, unknown>, F extends str
         });
     }
 
-    return box as B & {[P in F]: V};
+    return box as B & Record<F, V>;
 }
 
 export type Runtime = {
@@ -65,5 +65,6 @@ export function copy(from: string, to: string) {
  * Used for nodejs api
  */
 export function dynrequire(module: string) {
+    // eslint-disable-next-line no-eval
     return eval(`require('${module}')`);
 }
