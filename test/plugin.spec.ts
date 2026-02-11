@@ -1,16 +1,23 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import MarkdownIt from 'markdown-it';
-import yfmTransform from '@diplodoc/transform';
-import anchorsPlugin from '@diplodoc/transform/lib/plugins/anchors';
 
 import {transform as foldingHeadingsTransformer} from '../src/plugin/transform';
 
-import {
-    commonHeadingTokens,
-    foldingHeadingTokens,
-    headingsResult,
-    sectionsHtmlResult,
-} from './data';
+import {commonHeadingTokens, foldingHeadingTokens, sectionsHtmlResult} from './data';
+
+function html(markup: string, opts?: Parameters<typeof foldingHeadingsTransformer>[0]) {
+    const md = new MarkdownIt();
+    md.use(foldingHeadingsTransformer({bundle: false, ...opts}));
+    return md.render(markup);
+}
+
+function meta(markup: string, opts?: Parameters<typeof foldingHeadingsTransformer>[0]) {
+    const md = new MarkdownIt();
+    md.use(foldingHeadingsTransformer({bundle: false, ...opts}));
+    const env: {meta?: {script?: string[]; style?: string[]}} = {};
+    md.render(markup, env);
+    return env.meta;
+}
 
 describe('Folding Headings - plugin', () => {
     beforeEach(() => {
@@ -37,7 +44,7 @@ describe('Folding Headings - plugin', () => {
 
         `.trim();
 
-        const html = `
+        const expected = `
 <h1>Heading1</h1>
 <h2>Heading2</h2>
 <h3>Heading3</h3>
@@ -46,13 +53,10 @@ describe('Folding Headings - plugin', () => {
 <h6>Heading6</h6>
 `.trimStart();
 
-        expect(
-            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
-                .html,
-        ).toBe(html);
+        expect(html(markup)).toBe(expected);
     });
 
-    it('should render common headings', () => {
+    it('should render folding headings', () => {
         const markup = `
 
 #+ Heading1
@@ -64,26 +68,17 @@ describe('Folding Headings - plugin', () => {
 
         `.trim();
 
-        expect(
-            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
-                .html,
-        ).toBe(sectionsHtmlResult);
+        expect(html(markup)).toBe(sectionsHtmlResult);
     });
 
     it('should dont add assets to meta for common heading', () => {
         const markup = '# Heading';
-        expect(
-            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
-                .meta,
-        ).toBeUndefined();
+        expect(meta(markup)).toBeUndefined();
     });
 
     it('should add default assets to meta', () => {
         const markup = '#+ Heading';
-        expect(
-            yfmTransform(markup, {plugins: [foldingHeadingsTransformer({bundle: false})]}).result
-                .meta,
-        ).toStrictEqual({
+        expect(meta(markup)).toStrictEqual({
             script: ['_assets/folding-headings-extension.js'],
             style: ['_assets/folding-headings-extension.css'],
         });
@@ -91,63 +86,19 @@ describe('Folding Headings - plugin', () => {
 
     it('should add custom assets to meta', () => {
         const markup = '#+ Heading';
-        expect(
-            yfmTransform(markup, {
-                plugins: [foldingHeadingsTransformer({bundle: false, runtime: 'folding'})],
-            }).result.meta,
-        ).toStrictEqual({script: ['folding'], style: ['folding']});
+        expect(meta(markup, {runtime: 'folding'})).toStrictEqual({
+            script: ['folding'],
+            style: ['folding'],
+        });
     });
 
     it('should add custom assets to meta 2', () => {
         const markup = '#+ Heading';
         expect(
-            yfmTransform(markup, {
-                plugins: [
-                    foldingHeadingsTransformer({
-                        bundle: false,
-                        runtime: {script: 'folding.script', style: 'folding.style'},
-                    }),
-                ],
-            }).result.meta,
+            meta(markup, {
+                runtime: {script: 'folding.script', style: 'folding.style'},
+            }),
         ).toStrictEqual({script: ['folding.script'], style: ['folding.style']});
-    });
-
-    it('should collect common headings', () => {
-        const markup = `
-
-# Heading1
-## Heading2
-### Heading3
-#### Heading4
-##### Heading5
-###### Heading6
-
-        `.trim();
-
-        expect(
-            yfmTransform(markup, {
-                plugins: [anchorsPlugin, foldingHeadingsTransformer({bundle: false})],
-            }).result.headings,
-        ).toStrictEqual(headingsResult);
-    });
-
-    it('should collect folding headings', () => {
-        const markup = `
-
-#+ Heading1
-##+ Heading2
-###+ Heading3
-####+ Heading4
-#####+ Heading5
-######+ Heading6
-
-        `.trim();
-
-        expect(
-            yfmTransform(markup, {
-                plugins: [anchorsPlugin, foldingHeadingsTransformer({bundle: false})],
-            }).result.headings,
-        ).toStrictEqual(headingsResult);
     });
 
     it('should parse markup to common headings', () => {

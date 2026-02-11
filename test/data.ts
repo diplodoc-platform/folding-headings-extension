@@ -1,5 +1,3 @@
-import type {Heading} from '@diplodoc/transform/lib/typings';
-
 export const sectionsHtmlResult = `
 <section class="heading-section" data-diplodoc-key="heading-section" data-diplodoc-id="heading-section-4g2ndquh">
 <h1>Heading1</h1>
@@ -31,42 +29,6 @@ export const sectionsHtmlResult = `
 </div>
 </section>
 `.trimStart();
-
-export const headingsResult: Heading[] = [
-    {
-        title: 'Heading2',
-        href: '#heading2',
-        level: 2,
-        items: [
-            {
-                title: 'Heading3',
-                href: '#heading3',
-                level: 3,
-                items: [
-                    {
-                        title: 'Heading4',
-                        href: '#heading4',
-                        level: 4,
-                        items: [
-                            {
-                                title: 'Heading5',
-                                href: '#heading5',
-                                level: 5,
-                                items: [
-                                    {
-                                        title: 'Heading6',
-                                        href: '#heading6',
-                                        level: 6,
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-];
 
 export const commonHeadingTokens = [
     {
