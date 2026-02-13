@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.3](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.1.2...v0.1.3) (2026-02-13)
+
+
+### Bug Fixes
+
+* include test in tsconfig for ESLint type-aware linting ([9e6902a](https://github.com/diplodoc-platform/folding-headings-extension/commit/9e6902aec2e9ff0ac3beda3a82dfeb4f779bbfe2))
+* Update infra to 1.13.2 ([7301463](https://github.com/diplodoc-platform/folding-headings-extension/commit/7301463d5e90f5ae456f5a8a43c16aa74d541b4e))
+* update version actions, node 22 ([cd9f102](https://github.com/diplodoc-platform/folding-headings-extension/commit/cd9f1020b37a533e64e9a3d599b5f1ef520b71c3))
+
 ## [0.1.2](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.1.1...v0.1.2) (2024-12-11)
 
 
