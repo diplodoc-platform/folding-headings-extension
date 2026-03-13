@@ -27,8 +27,15 @@ $yfmAnchorWidth: 24px;
 
         @include m.chevron();
 
-        .yfm-anchor {
+        .yfm-anchor,
+        .yfm-clipboard-anchor {
             margin-left: -#{$yfmAnchorWidth + $paddingLeft}; // width of yfm-anchor (24px) + padding of heading (28px)
+
+            // overrides styles from transformer
+            // https://github.com/diplodoc-platform/transform/blob/f2626e8658c06100dfb081e64ba1dbb06510c8dd/src/scss/_anchor.scss#L63
+            .yfm table & {
+                margin-left: -2.5em;
+            }
         }
     }
 
