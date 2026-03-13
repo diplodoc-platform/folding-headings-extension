@@ -1,6 +1,6 @@
 {
   "name": "@diplodoc/folding-headings-extension",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Folding headings extension for Diplodoc platform ",
   "main": "build/plugin/index.js",
   "types": "build/plugin/index.d.ts",
