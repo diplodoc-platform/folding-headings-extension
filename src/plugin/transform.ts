@@ -1,8 +1,9 @@
 import type MarkdownIt from 'markdown-it';
 import type {PluginWithOptions} from 'markdown-it';
+import type {IDGenerator} from '@diplodoc/utils';
 
 import {ENV_FLAG_NAME} from './const';
-import {foldingHeadingPlugin} from './plugin';
+import {createFoldingHeadingPlugin} from './plugin';
 import {type Runtime, copyRuntime, dynrequire, hidden} from './utils';
 
 const registerTransform = (
@@ -11,11 +12,13 @@ const registerTransform = (
         runtime,
         bundle,
         output,
+        generateID,
     }: Pick<NormalizedPluginOptions, 'bundle' | 'runtime'> & {
         output: string;
+        generateID?: IDGenerator;
     },
 ) => {
-    md.use(foldingHeadingPlugin);
+    md.use(createFoldingHeadingPlugin(generateID));
     md.core.ruler.push('heading_sections_after', ({env}) => {
         hidden(env, 'bundled', new Set<string>());
 
@@ -66,14 +69,15 @@ export function transform(options: Partial<TransformOptions> = {}) {
                   style: '_assets/folding-headings-extension.css',
               };
 
-    const plugin: PluginWithOptions<{output?: string}> = function (
+    const plugin: PluginWithOptions<{output?: string; generateID?: IDGenerator}> = function (
         md: MarkdownIt,
-        {output = '.'} = {},
+        {output = '.', generateID} = {},
     ) {
         registerTransform(md, {
             runtime,
             bundle,
             output,
+            generateID,
         });
     };
 

@@ -31,7 +31,6 @@ describe('Folding Headings - plugin', () => {
     afterEach(() => {
         vi.spyOn(globalThis.Math, 'random').mockRestore();
     });
-
     it('should render common headings', () => {
         const markup = `
 

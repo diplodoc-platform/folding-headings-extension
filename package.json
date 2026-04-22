@@ -49,6 +49,7 @@
   "devDependencies": {
     "@diplodoc/lint": "^1.14.1",
     "@diplodoc/tsconfig": "^1.0.2",
+    "@diplodoc/utils": "^2.2.2",
     "@types/markdown-it": "^13.0.9",
     "@vitest/coverage-v8": "^3.2.4",
     "markdown-it": "^13.0.0",
