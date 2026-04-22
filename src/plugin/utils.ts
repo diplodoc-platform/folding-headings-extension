@@ -1,9 +1,3 @@
-import {DATA_KEY} from './const';
-
-export function generateID() {
-    return DATA_KEY + '-' + Math.random().toString(36).substr(2, 8);
-}
-
 export function headingLevel(header: string) {
     return parseInt(header.charAt(1), 10);
 }
