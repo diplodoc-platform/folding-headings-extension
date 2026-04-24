@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.1.3...v0.2.0) (2026-04-24)
+
+
+### Features
+
+* Use generateID method from utils DOCSTOOLS-5561 ([41725a5](https://github.com/diplodoc-platform/folding-headings-extension/commit/41725a5a3b9dcc74500436192a7204abe0fcef37))
+
 ## [0.1.3](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.1.2...v0.1.3) (2026-03-13)
 
 
