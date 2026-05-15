@@ -41,13 +41,12 @@
     "test:watch": "vitest --config vitest.config.mjs",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "lint update && lint",
-    "lint:fix": "lint update && lint fix",
-    "pre-commit": "lint update && lint-staged",
-    "prepare": "husky"
+    "lint": "lint",
+    "lint:fix": "lint fix",
+    "pre-commit": "lint-staged",
+    "prepare": "husky || true"
   },
   "devDependencies": {
-    "@diplodoc/lint": "^1.14.1",
     "@diplodoc/tsconfig": "^1.0.2",
     "@diplodoc/utils": "^2.2.2",
     "@types/markdown-it": "^13.0.9",
@@ -55,6 +54,7 @@
     "markdown-it": "^13.0.0",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.3.3",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@diplodoc/infra": "1.0.0"
   }
 }
