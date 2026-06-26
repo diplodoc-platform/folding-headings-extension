@@ -1,3 +1,7 @@
+**english** | [русский](https://github.com/diplodoc-platform/folding-headings-extension/blob/master/README.ru.md)
+
+---
+
 [![NPM version](https://img.shields.io/npm/v/@diplodoc/folding-headings-extension.svg?style=flat)](https://www.npmjs.org/package/@diplodoc/folding-headings-extension)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_folding-headings-extension&metric=alert_status)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_folding-headings-extension)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=diplodoc-platform_folding-headings-extension&metric=coverage)](https://sonarcloud.io/summary/overall?id=diplodoc-platform_folding-headings-extension)
