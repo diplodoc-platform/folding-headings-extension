@@ -48,7 +48,6 @@
     "lock": "npm install --no-workspaces --package-lock-only --ignore-scripts"
   },
   "devDependencies": {
-    "@diplodoc/tsconfig": "^1.0.2",
     "@diplodoc/utils": "^2.2.2",
     "@types/markdown-it": "^13.0.9",
     "@vitest/coverage-v8": "^3.2.4",
