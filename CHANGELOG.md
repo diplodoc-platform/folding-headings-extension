@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.2...v0.2.3) (2026-07-16)
+
+
+### Bug Fixes
+
+* do not override package with tsc build ([#39](https://github.com/diplodoc-platform/folding-headings-extension/issues/39)) ([3fddace](https://github.com/diplodoc-platform/folding-headings-extension/commit/3fddace33297cce5b61f1f28f9ad0b1b9ad1ffbd))
+
 ## [0.2.2](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.1...v0.2.2) (2026-07-16)
 
 
