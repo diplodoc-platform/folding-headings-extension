@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.1...v0.2.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* types are bundled to wrong location ([#36](https://github.com/diplodoc-platform/folding-headings-extension/issues/36)) ([e8c189f](https://github.com/diplodoc-platform/folding-headings-extension/commit/e8c189ffac26a205bf7f0c9b0e561e605fb59a9d))
+
 ## [0.2.1](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.0...v0.2.1) (2026-05-28)
 
 
