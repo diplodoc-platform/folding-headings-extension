@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "build": "run-p build:*",
-    "build:declarations": "tsc --emitDeclarationOnly --outDir ./build",
+    "build:declarations": "tsc -p tsconfig.publish.json",
     "build:js": "node ./esbuild/build.mjs",
     "prepublishOnly": "npm run typecheck && npm run lint && npm test && npm run build",
     "test": "vitest run --config vitest.config.mjs",
