@@ -2,8 +2,7 @@
   "extends": "@diplodoc/infra/tsconfig.json",
   "compilerOptions": {
     "target": "es2022",
-    "module": "es2022",
-    "declaration": true
+    "module": "es2022"
   },
   "include": ["src", "test"],
   "exclude": ["node_modules"]
