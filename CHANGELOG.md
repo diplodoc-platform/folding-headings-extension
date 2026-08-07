@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.5](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.4...v0.2.5) (2026-08-07)
+
+
+### Bug Fixes
+
+* Upgrade typescript to 5.9.3 DOCSTOOLS-6357 ([fe44adb](https://github.com/diplodoc-platform/folding-headings-extension/commit/fe44adb9961cdff1449d8ea2f9c03b84a9754e4e))
+* Upgrade typescript to 6.0.3 DOCSTOOLS-6359 ([d747fec](https://github.com/diplodoc-platform/folding-headings-extension/commit/d747fec45b2f588b73b3d34c67b7e430b6822356))
+
 ## [0.2.4](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.3...v0.2.4) (2026-07-21)
 
 
