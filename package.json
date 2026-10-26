@@ -48,7 +48,7 @@
     "lock": "npm install --no-workspaces --package-lock-only --ignore-scripts"
   },
   "devDependencies": {
-    "@diplodoc/infra": "2.2.3",
+    "@diplodoc/infra": "2.3.0",
     "@diplodoc/utils": "^2.3.6",
     "@types/markdown-it": "^13.0.9",
     "@vitest/coverage-v8": "^3.2.4",
