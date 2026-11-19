@@ -1,4 +1,4 @@
-import type MarkdownIt from 'markdown-it';
+import type {MarkdownIt} from 'markdown-it';
 import type {IDGenerator} from '@diplodoc/utils';
 
 import {headingBlockRule} from './headingBlockRule';
