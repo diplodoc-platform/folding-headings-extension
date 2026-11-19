@@ -1,10 +1,12 @@
-import type MarkdownIt from 'markdown-it';
-import type {PluginWithOptions} from 'markdown-it';
+import type MarkdownItConstructor from 'markdown-it';
+import type {Env, MarkdownIt} from 'markdown-it';
 import type {IDGenerator} from '@diplodoc/utils';
 
 import {ENV_FLAG_NAME} from './const';
 import {createFoldingHeadingPlugin} from './plugin';
 import {type Runtime, copyRuntime, dynrequire, hidden} from './utils';
+
+type RuntimeEnv = Env & {meta?: {script?: string[]; style?: string[]}};
 
 const registerTransform = (
     md: MarkdownIt,
@@ -19,8 +21,8 @@ const registerTransform = (
     },
 ) => {
     md.use(createFoldingHeadingPlugin(generateID));
-    md.core.ruler.push('heading_sections_after', ({env}) => {
-        hidden(env, 'bundled', new Set<string>());
+    md.core.ruler.push('heading_sections_after', ({env}: {env: RuntimeEnv}) => {
+        const runtimeEnv = hidden(env, 'bundled', new Set<string>());
 
         if (env?.[ENV_FLAG_NAME]) {
             env.meta = env.meta || {};
@@ -30,7 +32,7 @@ const registerTransform = (
             env.meta.style.push(runtime.style);
 
             if (bundle) {
-                copyRuntime({runtime, output}, env.bundled);
+                copyRuntime({runtime, output}, runtimeEnv.bundled);
             }
         }
     });
@@ -69,9 +71,9 @@ export function transform(options: Partial<TransformOptions> = {}) {
                   style: '_assets/folding-headings-extension.css',
               };
 
-    const plugin: PluginWithOptions<{output?: string; generateID?: IDGenerator}> = function (
+    const plugin = function (
         md: MarkdownIt,
-        {output = '.', generateID} = {},
+        {output = '.', generateID}: {output?: string; generateID?: IDGenerator} = {},
     ) {
         registerTransform(md, {
             runtime,
@@ -81,9 +83,9 @@ export function transform(options: Partial<TransformOptions> = {}) {
         });
     };
 
-    Object.assign(plugin, {
+    return Object.assign(plugin, {
         collect(input: string, {destRoot = '.'}: InputOptions) {
-            const MdIt = dynrequire('markdown-it');
+            const MdIt: typeof MarkdownItConstructor = dynrequire('markdown-it');
             const md = new MdIt().use((md: MarkdownIt) => {
                 registerTransform(md, {
                     runtime,
@@ -95,6 +97,4 @@ export function transform(options: Partial<TransformOptions> = {}) {
             md.parse(input, {});
         },
     });
-
-    return plugin;
 }

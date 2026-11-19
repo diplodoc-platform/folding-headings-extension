@@ -1,10 +1,15 @@
-import type ParserBlock from 'markdown-it/lib/parser_block';
+import type {StateBlock} from 'markdown-it';
 
 import {TokenType} from './const';
 
 // copied from https://github.com/markdown-it/markdown-it/blob/14.1.0/lib/rules_block/heading.mjs
 // modified: support syntax ###+ for folding headings
-export const headingBlockRule: ParserBlock.RuleBlock = (state, startLine, _endLine, silent) => {
+export const headingBlockRule = (
+    state: StateBlock,
+    startLine: number,
+    _endLine: number,
+    silent: boolean,
+) => {
     const {isSpace} = state.md.utils;
 
     let pos = state.bMarks[startLine] + state.tShift[startLine];

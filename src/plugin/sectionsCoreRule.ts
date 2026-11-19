@@ -1,4 +1,4 @@
-import type Core from 'markdown-it/lib/parser_core';
+import type {StateCore} from 'markdown-it';
 import type {IDGenerator} from '@diplodoc/utils';
 
 import {createIDGeneratorByStrategy} from '@diplodoc/utils';
@@ -15,13 +15,13 @@ type Section = {header: number; nesting: number};
  *   When omitted, uses random fallback behavior.
  * @returns Markdown-it core rule that injects section wrapper tokens around folding headings.
  */
-export function createSectionsCoreRule(externalGenerateID?: IDGenerator): Core.RuleCore {
+export function createSectionsCoreRule(externalGenerateID?: IDGenerator) {
     // Use the external generator if provided, otherwise use random fallback.
     // Random IDs are the default behavior for production builds.
     const generateID: IDGenerator =
         externalGenerateID ?? (createIDGeneratorByStrategy('random') as IDGenerator);
 
-    return (state) => {
+    return (state: StateCore) => {
         const Token = state.Token;
         const tokens: typeof state.tokens = []; // output
         const sections: Section[] = [];
