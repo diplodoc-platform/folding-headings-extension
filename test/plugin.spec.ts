@@ -1,3 +1,5 @@
+import type {Token} from 'markdown-it';
+
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import MarkdownIt from 'markdown-it';
 
@@ -265,6 +267,6 @@ function toPlainObject<T extends object>(obj: T): T {
     return JSON.parse(JSON.stringify(obj));
 }
 
-function pickTypes(tokens: MarkdownIt.Token[]): string[] {
+function pickTypes(tokens: Token[]): string[] {
     return tokens.map((token) => token.type);
 }

@@ -13,6 +13,8 @@
 
 This is an extension of the Diplodoc platform, which allows adding folding headings in the documentation.
 
+Version 1 requires `markdown-it` ^15.0.3 for rendering and collecting resources.
+
 ## Quickstart
 
 _TBD_
