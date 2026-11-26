@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.5...v1.0.0) (2026-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **markdown-it:** Folding Headings requires Markdown-it 15.0.3 or newer within major 15 and Utils 3. The plugin exposes its existing resource collector with native Markdown-it types.
+
+### Features
+
+* **markdown-it:** require Markdown-it 15 ([5c9b34f](https://github.com/diplodoc-platform/folding-headings-extension/commit/5c9b34f3a9ea9de95663fc27c8409f2f8483d670))
+
 ## [0.2.5](https://github.com/diplodoc-platform/folding-headings-extension/compare/v0.2.4...v0.2.5) (2026-08-07)
 
 
