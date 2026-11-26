@@ -56,7 +56,7 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@diplodoc/utils": "^3.0.0-beta.2"
+    "@diplodoc/utils": "^3.0.0"
   },
   "peerDependencies": {
     "markdown-it": "^15.0.3"
